@@ -1,5 +1,51 @@
 {
+  "name": "theme-extractor",
+  "version": "1.0.0",
+  "description": "🎨 AI-Powered Web Design System Extraction Tool - Automatically extract complete design systems, themes, and CSS variables from any website",
+  "main": "extract-linear-theme.js",
+  "scripts": {
+    "start": "node extract-linear-theme.js",
+    "extract": "node extract-linear-theme.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "design-system",
+    "theme-extraction",
+    "css-variables",
+    "web-scraping",
+    "design-tokens",
+    "playwright",
+    "automation",
+    "css",
+    "design",
+    "frontend",
+    "ui",
+    "colors",
+    "typography",
+    "theming"
+  ],
+  "author": {
+    "name": "hojoon123",
+    "url": "https://github.com/hojoon123"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hojoon123/theme-export.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hojoon123/theme-export/issues"
+  },
+  "homepage": "https://github.com/hojoon123/theme-export#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "playwright": "^1.54.2"
+  },
+  "devDependencies": {},
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hojoon123"
   }
 }

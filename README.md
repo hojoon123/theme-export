@@ -1,111 +1,311 @@
-# Theme Extractor
+<div align="center">
 
-웹사이트의 테마 및 디자인 시스템을 자동으로 추출하는 도구입니다.
+# 🎨 Theme Extractor
 
-## 설치
+**AI-Powered Web Design System Extraction Tool**
+
+[![GitHub Stars](https://img.shields.io/github/stars/hojoon123/theme-export?style=for-the-badge&logo=github&color=yellow)](https://github.com/hojoon123/theme-export/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![Playwright](https://img.shields.io/badge/Playwright-Latest-orange?style=for-the-badge&logo=playwright)](https://playwright.dev/)
+
+*Automatically extract complete design systems, themes, and CSS variables from any website with just one command* ✨
+
+[✨ **Try it now**](#-quick-start) | [📖 **Documentation**](#-documentation) | [🎯 **Examples**](#-what-gets-extracted) | [🤝 **Contribute**](#-contributing)
+
+</div>
+
+---
+
+## 🚀 What is Theme Extractor?
+
+Theme Extractor is a powerful automation tool that **reverse-engineers any website's design system** in seconds. Perfect for developers, designers, and anyone who wants to understand how beautiful websites are built.
+
+### ✨ Why use Theme Extractor?
+
+- 🎯 **One-click extraction** - Get complete design systems instantly
+- 🎨 **Professional quality** - Extract production-ready design tokens  
+- 🔍 **Deep analysis** - CSS variables, component styles, typography scales
+- 📱 **Screenshot included** - Visual reference alongside data
+- 🌍 **Any website** - Works with modern websites using CSS-in-JS, CSS variables, etc.
+- 💻 **Developer friendly** - Clean JSON output ready for your design system
+
+---
+
+## 🎯 What Gets Extracted
+
+<details>
+<summary>🎨 <strong>Color System</strong></summary>
+
+- Primary, secondary, accent colors
+- Background and surface colors  
+- Text colors (primary, secondary, muted)
+- Border and outline colors
+- CSS custom properties for colors
+</details>
+
+<details>
+<summary>✍️ <strong>Typography System</strong></summary>
+
+- Font families and fallbacks
+- Font sizes, weights, and line heights
+- Letter spacing and text transforms
+- Heading scales (H1-H6)
+- Body text styles
+</details>
+
+<details>
+<summary>📐 <strong>Spacing & Layout</strong></summary>
+
+- Margin and padding scales
+- Gap and grid systems
+- Border radius values
+- Box shadows and effects
+- Flexbox and Grid properties
+</details>
+
+<details>
+<summary>🧩 <strong>Component Styles</strong></summary>
+
+- Button variants and states
+- Card and panel designs
+- Navigation elements
+- Form controls
+- Interactive elements
+</details>
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/hojoon123/theme-export.git
+cd theme-export
+
+# Install dependencies
 npm install
 ```
 
-## 사용법
-
-### 기본 사용법
+### Basic Usage
 
 ```bash
+# Extract theme from any website
 node extract-linear-theme.js
 ```
 
-### 추출되는 데이터
+### 📁 Output Files
 
-- **색상 시스템**: 배경색, 텍스트 색상, 보더 색상 등
-- **타이포그래피**: 폰트 패밀리, 크기, 굵기, 줄간격 등
-- **스페이싱**: 마진, 패딩, 간격 등
-- **레이아웃**: 디스플레이, 플렉스, 그리드 속성 등
-- **컴포넌트 스타일**: 버튼, 카드, 헤딩 등의 스타일
-- **CSS 변수**: 모든 CSS 커스텀 프로퍼티
-- **메타 정보**: 뷰포트, 브라우저 정보 등
+After running, you'll get:
 
-### 출력 파일
+- `📄 linear-theme-YYYY-MM-DD.json` - Complete design system data
+- `📸 linear-screenshot-YYYY-MM-DD.png` - Full page screenshot
 
-실행하면 다음 파일들이 생성됩니다:
+---
 
-- `linear-theme-YYYY-MM-DD.json`: 추출된 테마 데이터
-- `linear-screenshot-YYYY-MM-DD.png`: 전체 페이지 스크린샷
+## 🛠️ Customization
 
-### 대상 웹사이트 변경
+### 🎯 Target Different Websites
 
-`extract-linear-theme.js` 파일에서 URL을 수정하세요:
+Simply change the URL in `extract-linear-theme.js`:
 
 ```javascript
-await page.goto('https://your-website.com/', {
+await page.goto('https://your-target-website.com/', {
   waitUntil: 'domcontentloaded',
   timeout: 60000
 });
 ```
 
-### 특정 요소만 추출하기
+### 🔧 Extract Specific Elements
 
-파일 하단의 `extractSpecificElements` 함수를 사용할 수 있습니다:
+Use the built-in `extractSpecificElements` function:
 
 ```javascript
 extractSpecificElements([
   '.primary-button',
-  '.hero-section',
+  '.hero-section', 
   '.navigation',
-  '.card'
+  '.card-component'
 ]).then(data => console.log(data));
 ```
 
-## 추출된 데이터 구조
+### ⚙️ Advanced Configuration
+
+```javascript
+// Increase loading time for heavy websites
+await page.waitForTimeout(10000);
+
+// Add custom selectors
+navigation: document.querySelector('nav, header, [data-nav], .your-nav-class'),
+
+// Run in headless mode
+const browser = await chromium.launch({ headless: true });
+```
+
+---
+
+## 📊 Sample Output Structure
 
 ```json
 {
   "body": {
-    "colors": { "backgroundColor": "...", "color": "..." },
-    "typography": { "fontFamily": "...", "fontSize": "..." },
-    "spacing": { "margin": "...", "padding": "..." },
-    "layout": { "display": "...", "flexDirection": "..." }
+    "colors": {
+      "backgroundColor": "rgb(8, 9, 10)",
+      "color": "rgb(247, 248, 248)"
+    },
+    "typography": {
+      "fontFamily": "Inter Variable, SF Pro Display",
+      "fontSize": "16px",
+      "fontWeight": "400"
+    }
   },
-  "navigation": { /* 네비게이션 스타일 */ },
-  "buttons": [ /* 버튼 스타일 배열 */ ],
-  "headings": { 
-    "h1": { /* h1 스타일 */ },
-    "h2": { /* h2 스타일 */ }
+  "cssVariables": {
+    "--color-primary": "#5e6ad2",
+    "--color-bg-primary": "#08090a",
+    "--font-size-large": "1.125rem",
+    "--radius-rounded": "9999px"
   },
-  "cards": [ /* 카드/컨테이너 스타일 배열 */ ],
-  "cssVariables": { /* CSS 변수들 */ },
-  "viewport": { "width": 1920, "height": 1080 },
-  "meta": { "title": "...", "url": "...", "timestamp": "..." }
+  "buttons": [
+    {
+      "className": "primary-button",
+      "colors": { "backgroundColor": "#5e6ad2" },
+      "borderRadius": "8px"
+    }
+  ]
 }
 ```
 
-## 문제 해결
+---
 
-### 로딩이 느린 경우
-대기 시간을 늘려주세요:
+## 💡 Use Cases
+
+### 🎨 **For Designers**
+- Research design trends and patterns
+- Create design system documentation  
+- Analyze competitor interfaces
+- Build mood boards and style guides
+
+### 👩‍💻 **For Developers**
+- Reverse-engineer CSS architectures
+- Extract design tokens for your own projects
+- Learn from well-designed websites
+- Build component libraries
+
+### 🏢 **For Teams**
+- Standardize design systems across projects
+- Document existing website styles
+- Create consistent brand guidelines
+- Onboard new team members faster
+
+---
+
+## 🔧 Troubleshooting
+
+<details>
+<summary><strong>🐌 Website loads slowly</strong></summary>
+
+Increase the timeout duration:
 ```javascript
-await page.waitForTimeout(8000); // 8초 대기
+await page.waitForTimeout(15000); // 15 seconds
 ```
+</details>
 
-### 특정 요소가 추출되지 않는 경우
-셀렉터를 수정하거나 추가하세요:
+<details>
+<summary><strong>🔍 Missing specific elements</strong></summary>
+
+Add custom selectors:
 ```javascript
-navigation: document.querySelector('nav, header, [class*="nav"], [class*="header"], .your-nav-class'),
+navigation: document.querySelector('nav, header, [role="navigation"], .your-nav-class'),
 ```
+</details>
 
-### 브라우저가 열리지 않는 경우
-headless 모드로 실행하세요:
+<details>
+<summary><strong>🚫 Browser won't open</strong></summary>
+
+Try headless mode:
 ```javascript
 const browser = await chromium.launch({ headless: true });
 ```
+</details>
 
-## 요구사항
+<details>
+<summary><strong>❌ Script fails on certain websites</strong></summary>
 
-- Node.js 14 이상
-- Playwright
-- 인터넷 연결
+Some websites block automation. Try:
+- Different User-Agent strings
+- Adding delays between actions
+- Using residential proxies
+</details>
 
-## 라이센스
+---
 
-MIT
+## 🏗️ Built With
+
+- **[Playwright](https://playwright.dev/)** - Web automation and scraping
+- **[Node.js](https://nodejs.org/)** - Runtime environment
+- **JavaScript** - Core language
+
+---
+
+## 🤝 Contributing
+
+We love contributions! Here's how you can help:
+
+### 🌟 Quick Contributions
+- ⭐ **Star this repo** if you find it useful
+- 🐛 **Report bugs** via [Issues](https://github.com/hojoon123/theme-export/issues)
+- 💡 **Suggest features** you'd like to see
+- 📖 **Improve documentation** 
+
+### 🔧 Code Contributions
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### 📝 Ideas for Contributions
+- Support for more CSS frameworks (Tailwind, Bootstrap, etc.)
+- Export to different formats (Figma tokens, Sketch, etc.)
+- GUI interface for non-technical users
+- Batch processing for multiple websites
+- Integration with popular design tools
+
+---
+
+## 📋 Requirements
+
+- **Node.js** 14.0 or higher
+- **npm** or **yarn**
+- **Internet connection**
+- **Modern browser** (Chromium-based)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Inspired by design systems from Linear, Figma, and other beautiful websites
+- Built with love for the design and development community
+- Special thanks to all contributors and users
+
+---
+
+<div align="center">
+
+### 🌟 If this tool helped you, please consider giving it a star!
+
+[![GitHub Stars](https://img.shields.io/github/stars/hojoon123/theme-export?style=social)](https://github.com/hojoon123/theme-export/stargazers)
+
+**Made with ❤️ by [hojoon123](https://github.com/hojoon123)**
+
+[⬆ Back to top](#-theme-extractor)
+
+</div>
